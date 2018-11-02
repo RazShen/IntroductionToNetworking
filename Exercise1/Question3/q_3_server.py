@@ -1,12 +1,11 @@
 from socket import socket, AF_INET, SOCK_DGRAM
 import sys
 
-print(len(sys.argv))
 if len(sys.argv) < 5:
     print("Not enough arguments, quitting...")
-my_port = sys.argv[1]
+my_port = int(sys.argv[1])
 parent_ip = sys.argv[2]
-parent_port = sys.argv[3]
+parent_port = int(sys.argv[3])
 ips_file_name = sys.argv[4]
 domain_to_ip = {}
 try:
@@ -42,6 +41,7 @@ def flush():
 
 while True:
     domain, sender_info = my_socket.recvfrom(2048)
+    print("in line 45")
     if domain in domain_to_ip:
         address = domain_to_ip[domain]
     else:
