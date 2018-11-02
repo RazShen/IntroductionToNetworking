@@ -12,6 +12,8 @@ domain_to_ip = {}
 try:
     with open(ips_file_name) as ips_file:
         for line in ips_file:
+            if line.index(",") < 0:
+                continue
             name, ip = line.split(",")
             ip = ip.strip()
             domain_to_ip[name] = ip
@@ -32,6 +34,11 @@ def request_from_parent(domain):
     temporary_socket.close()
     return result
 
+def flush():
+    with open(ips_file_name, 'w+') as ips:
+        for key,value in domain_to_ip.items():
+            ips.write(key+"," + value + "\n")
+        
 
 while True:
     domain, sender_info = my_socket.recvfrom(2048)
@@ -39,4 +46,7 @@ while True:
         address = domain_to_ip[domain]
     else:
         address = request_from_parent(domain)
+        domain_to_ip[domain] = address
+        flush()
     my_socket.sendto(address, sender_info)
+
