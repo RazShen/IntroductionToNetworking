@@ -3,7 +3,7 @@ import sys
 
 if (len(sys.argv)) < 3:
     print("not enough arguments, quitting...")
-# Parsing the arguments
+# Parsing the input
 server_ip = sys.argv[1]
 server_port = int(sys.argv[2])
 # Creating socket that uses udp and ipv4
