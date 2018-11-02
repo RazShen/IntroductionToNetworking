@@ -3,26 +3,38 @@ import sys
 
 if len(sys.argv) < 5:
     print("Not enough arguments, quitting...")
-port = sys.argv[1]
-parentIP = sys.argv[2]
-parentPort = sys.argv[3]
-ipsFileName = sys.argv[4]
-ips_name_ip_dict = {}
+my_port = sys.argv[1]
+parent_ip = sys.argv[2]
+parent_port = sys.argv[3]
+ips_file_name = sys.argv[4]
+domain_to_ip = {}
 try:
     with open(ipsFileName) as ips_file:
         for line in ips_file:
             name, ip = line.split(",")
             ips_name_ip_dict[name] = ip
-            
+
 except:
     print("error in loading ips file, quitting...")
     exit()
-s = socket(AF_INET, SOCK_DGRAM)
-source_ip = '127.0.0.1'
-source_port = 8080
-s.bind((source_ip, source_port))
+
+my_socket = socket(AF_INET, SOCK_DGRAM)
+my_ip = '127.0.0.1'
+my_socket.bind((my_ip, my_port))
+
+
+def request_from_parent(domain):
+    temporary_socket = socket(AF_INET, SOCK_DGRAM)
+    temporary_socket.sendto(domain, (parent_ip, parent_port))
+    result, sender = temporary_socket.recvfrom(2048)
+    temporary_socket.close()
+    return result
+
 
 while True:
-	data, sender_info = s.recvfrom(2048)
-	print "Message: ", data, " from: ", sender_info
-	s.sendto(data.upper(), sender_info)
+    domain, sender_info = my_socket.recvfrom(2048)
+    if domain in domain_to_ip:
+        address = domain_to_ip[domain]
+    else:
+        address = request_from_parent(domain)
+    my_socket.sendto(address, sender_info)
