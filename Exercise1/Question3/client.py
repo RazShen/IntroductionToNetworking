@@ -11,7 +11,7 @@ my_socket = socket(AF_INET, SOCK_DGRAM)
 # Getting input from the user
 domain = raw_input("")
 # Client always running asking queries (untill stop)
-while True:
+while domain != "quit":
     my_socket.sendto(domain, (server_ip, server_port))
     ip, sender_info = my_socket.recvfrom(2048)
     print ip
