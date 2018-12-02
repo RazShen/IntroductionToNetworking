@@ -1,7 +1,7 @@
 from socket import socket, AF_INET, SOCK_DGRAM
 
 s = socket(AF_INET, SOCK_DGRAM)
-dest_ip = '127.0.0.1
+dest_ip = '127.0.0.1'
 dest_port = 8080
 msg = raw_input("Message to send: ")
 
