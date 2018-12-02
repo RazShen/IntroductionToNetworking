@@ -10,10 +10,8 @@ server.listen(5)
 while True:
     client_socket, client_address = server.accept()
     print 'Connection from: ', client_address
-    data = client_socket.recv(1024)
-    while not data == '':
-        print 'Received:', data
-        client_socket.send(data.upper())
-        data = client_socket.recv(1024)
+    data = client_socket.recv(20000)
+    print 'Received:', data
+    client_socket.send('B')
     print 'Client disconnected'
     client_socket.close()
