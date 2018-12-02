@@ -1,6 +1,7 @@
 import socket, time
 
-IP = '172.19.3.40'
+
+IP = '127.0.0.1'
 PORT = 12347
 RECEIVING_SIZE = 4096
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
