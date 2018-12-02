@@ -1,7 +1,7 @@
 from socket import socket, AF_INET, SOCK_DGRAM
 
 s = socket(AF_INET, SOCK_DGRAM)
-dest_ip = '172.19.3.40'
+dest_ip = '0.0.0.0'
 dest_port = 8080
 msg = ''.join('A' for x in range(15000))
 s.sendto(msg, (dest_ip, dest_port))

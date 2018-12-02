@@ -2,7 +2,7 @@ from socket import socket, AF_INET, SOCK_DGRAM
 import time
 
 s = socket(AF_INET, SOCK_DGRAM)
-dest_ip = '172.19.3.40'
+dest_ip = '0.0.0.0'
 dest_port = 8080
 
 for i in range(11):
