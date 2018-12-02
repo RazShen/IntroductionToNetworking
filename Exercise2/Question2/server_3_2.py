@@ -1,23 +1,25 @@
 from socket import socket, AF_INET, SOCK_DGRAM
 
-
+# Server related constants
+IP = '0.0.0.0'
+PORT = 12345
+RECEIVING_BYTES = 1024
+# Create the socket and bind to our port.
 server_socket = socket(AF_INET, SOCK_DGRAM)
-source_ip = '0.0.0.0'
-source_port = 8080
-server_socket.bind((source_ip, source_port))
+server_socket.bind((IP, PORT))
 
-data = "hi"
-a_counter  = 0
-sender_info = 0
-while data!='':
-    data, sender_info = server_socket.recvfrom(1024)
+data = "hi"  # Dummy initialized the data variable.
+a_counter = 0
+while data != '':
+    # Receive data from the user.
+    data, sender_info = server_socket.recvfrom(RECEIVING_BYTES)
     if data == 'A':
         a_counter += 1
     elif data == 'AA':
         a_counter += 2
     print 'Received:', data
+    # Once 22 'A's are received(which is the amount expected), we can stop waiting for more messages.
     if a_counter == 22:
-        break
-server_socket.sendto('B', sender_info)
-print 'Client disconnected'
+        server_socket.sendto('B', sender_info)
+# Send back 'B' and close the connection.
 server_socket.close()
