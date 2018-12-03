@@ -13,6 +13,7 @@ a_counter = 0
 while data != '':
     # Receive data from the user.
     data, sender_info = server_socket.recvfrom(RECEIVING_BYTES)
+    server_socket.sendto('B', sender_info)
     if data == 'A':
         a_counter += 1
     elif data == 'AA':
@@ -20,6 +21,6 @@ while data != '':
     print 'Received:', data
     # Once 22 'A's are received(which is the amount expected), we can stop waiting for more messages.
     if a_counter == 22:
-        server_socket.sendto('B', sender_info)
+        break
 # Send back 'B' and close the connection.
 server_socket.close()

@@ -16,6 +16,7 @@ data = "hi"  # Dummy initial value
 a_counter = 0  # This counter remembers how many 'A's were sent so far.
 while data != '':  # The client will send '' if it closes.
     data = client_socket.recv(RECEIVING_BYTES)
+    client_socket.send('B')
     if data == 'A':  # Message is one A
         a_counter += 1
     elif data == 'AA':  # Message is two 'A's
@@ -25,7 +26,6 @@ while data != '':  # The client will send '' if it closes.
     if a_counter == 22:
         break
 # Answer B and close both sockets
-client_socket.send('B')
 print 'Client disconnected'
 client_socket.close()
 server.close()
