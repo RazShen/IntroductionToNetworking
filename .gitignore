@@ -1,3 +1,6 @@
 Exercise1/.DS_Store
 Exercise1/Question3/.DS_Store
 Exercise1/.DS_Store
+*.DS_Store
+*/.DS_Store
+.DS_Store
