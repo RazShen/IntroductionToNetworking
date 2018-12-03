@@ -7,7 +7,7 @@ This is a UDP client that sends 11 times two messages, both containing the lette
 Each iteration is separated by a two seconds waiting time.
 """
 # Connection related constants
-IP = '0.0.0.0'
+IP = '127.0.0.1'
 PORT = 8080
 RECEIVING_BYTES = 2048
 # Create a UDP socket.
@@ -18,6 +18,8 @@ for i in range(11):
     s.sendto(msg, (IP, PORT))
     s.sendto(msg, (IP, PORT))
     time.sleep(2)
+    data, sender_info = s.recvfrom(RECEIVING_BYTES)
+    print(data)
 # Print the response from the server and close the socket.
 data, sender_info = s.recvfrom(RECEIVING_BYTES)
 print "Server sent: ", data

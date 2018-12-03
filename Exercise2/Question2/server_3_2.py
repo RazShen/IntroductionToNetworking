@@ -2,7 +2,7 @@ from socket import socket, AF_INET, SOCK_DGRAM
 
 # Server related constants
 IP = '0.0.0.0'
-PORT = 12345
+PORT = 8080
 RECEIVING_BYTES = 1024
 # Create the socket and bind to our port.
 server_socket = socket(AF_INET, SOCK_DGRAM)
