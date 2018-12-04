@@ -22,10 +22,10 @@ for i in range(11):
     socket.send(msg)
     time.sleep(2)
     data = socket.recv(RECEIVING_SIZE)
-    print data
+    print(data)
 # Print the response from the server and close the connection.
 data = socket.recv(RECEIVING_SIZE)
-print "Server sent: ", data
+print ("Server sent: ", data)
 socket.close()
 
 
